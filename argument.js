@@ -10,4 +10,4 @@ let challenge = function(amount = 100, percent = .2) {
 }
 
 
-console.log(challenge(40, .001));
+console.log(      challenge(40, .001));

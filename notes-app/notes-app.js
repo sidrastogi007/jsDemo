@@ -17,6 +17,14 @@ const filters = {
   searchText: ''
 };
 
+localStorage.setItem('location', 'Noida');
+
+console.log(localStorage.getItem('location'));
+
+localStorage.clear();
+
+// localStorage.removeItem('location');
+
 const renderNotes = function(notes, filters) {
   const filteredNotes = notes.filter(function(note) {
     return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
@@ -40,4 +48,8 @@ document.querySelector('#create-note').addEventListener('click', function(e) {
 document.querySelector('#search-text').addEventListener('input', function(e) {
   filters.searchText = e.target.value;
   renderNotes(notes, filters);
+});
+
+document.querySelector('#filter-by').addEventListener('change', function(e) {
+  console.log(e.target.value);
 });

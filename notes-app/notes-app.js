@@ -1,29 +1,8 @@
-const notes = [
-  {
-    title: 'my next trip',
-    body: 'I would like to go to Spain'
-  },
-  {
-    title: 'Habbits to work on',
-    body: 'Exercise. Eating a bit better.'
-  },
-  {
-    title: 'Office modification',
-    body: 'Get a new seat'
-  }
-];
+const notes = [];
 
 const filters = {
   searchText: ''
 };
-
-localStorage.setItem('location', 'Noida');
-
-console.log(localStorage.getItem('location'));
-
-localStorage.clear();
-
-// localStorage.removeItem('location');
 
 const renderNotes = function(notes, filters) {
   const filteredNotes = notes.filter(function(note) {
@@ -34,7 +13,11 @@ const renderNotes = function(notes, filters) {
 
   filteredNotes.forEach(function(note) {
     const noteEl = document.createElement('p');
-    noteEl.textContent = note.title;
+    if (note.title.length > 0) {
+      noteEl.textContent = note.title;
+    } else {
+      noteEl.textContent = 'Unnamed Notes';
+    }
     document.querySelector('#notes').appendChild(noteEl);
   });
 };
@@ -42,7 +25,13 @@ const renderNotes = function(notes, filters) {
 renderNotes(notes, filters);
 
 document.querySelector('#create-note').addEventListener('click', function(e) {
-  e.target.textContent = 'The button was clicked';
+  notes.push({
+    title: '',
+    body: ''
+  });
+
+  localStorage.setItem('notes', notes);
+  renderNotes(notes, filters);
 });
 
 document.querySelector('#search-text').addEventListener('input', function(e) {

@@ -25,7 +25,15 @@ const removeTodo = function(id) {
 };
 
 // Toggle Completed value for Todos
-const toggleTodo = function
+const toggleTodo = function(id) {
+  const todoIndex = todos.findIndex(todo => {
+    return todo.id === id;
+  });
+
+  if (todoIndex > -1) {
+    todos[todoIndex].completed = !todos[todoIndex].completed;
+  }
+};
 
 // Genrate Todo DOM
 const genrateTodoDOM = function(todo) {
@@ -40,6 +48,8 @@ const genrateTodoDOM = function(todo) {
   todoEl.appendChild(checkBoxEl);
   checkBoxEl.addEventListener('change', function() {
     toggleTodo(todo.id);
+    saveTodos(todos);
+    renderTodos(todos, filters);
   });
 
   // Setup todo text

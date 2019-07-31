@@ -26,12 +26,12 @@ const removeTodo = function(id) {
 
 // Toggle Completed value for Todos
 const toggleTodo = function(id) {
-  const todoIndex = todos.findIndex(todo => {
+  const todo = todos.find(todo => {
     return todo.id === id;
   });
 
-  if (todoIndex > -1) {
-    todos[todoIndex].completed = !todos[todoIndex].completed;
+  if (todo !== undefined) {
+    todo.completed = !todo.completed;
   }
 };
 

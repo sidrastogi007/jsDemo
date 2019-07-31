@@ -14,14 +14,40 @@ const saveNotes = function(notes) {
   localStorage.setItem('notes', JSON.stringify(notes));
 };
 
+// Remove notes value
+const removeNote = function(id) {
+  const noteIndex = notes.findIndex(note => {
+    return (note.id = id);
+  });
+
+  if (noteIndex > -1) {
+    notes.splice(noteIndex, 1);
+  }
+};
+
 // Generate the DOM structure for a note
 const genrateNotesDOM = function(note) {
-  const noteEl = document.createElement('p');
+  const noteEl = document.createElement('div');
+  const titleEl = document.createElement('span');
+  const buttonEl = document.createElement('button');
+
+  // Setup the note remove note button
+  buttonEl.textContent = 'x';
+  noteEl.appendChild(buttonEl);
+  buttonEl.addEventListener('click', function(e) {
+    removeNote(note.id);
+    saveNotes(notes);
+    renderNotes(notes, filters);
+  });
+
+  // Setup the note title text
   if (note.title.length > 0) {
-    noteEl.textContent = note.title;
+    titleEl.textContent = note.title;
   } else {
-    noteEl.textContent = 'Unnamed Notes';
+    titleEl.textContent = 'Unnamed Notes';
   }
+
+  noteEl.appendChild(titleEl);
 
   return noteEl;
 };

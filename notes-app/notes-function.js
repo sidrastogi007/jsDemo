@@ -28,7 +28,7 @@ const removeNote = function(id) {
 // Generate the DOM structure for a note
 const genrateNotesDOM = function(note) {
   const noteEl = document.createElement('div');
-  const titleEl = document.createElement('span');
+  const titleEl = document.createElement('a');
   const buttonEl = document.createElement('button');
 
   // Setup the note remove note button
@@ -46,6 +46,7 @@ const genrateNotesDOM = function(note) {
   } else {
     titleEl.textContent = 'Unnamed Notes';
   }
+  titleEl.setAttribute('href', `./edit.html#${note.id}`);
 
   noteEl.appendChild(titleEl);
 

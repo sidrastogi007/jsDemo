@@ -32,3 +32,12 @@ window.addEventListener('storage', function(e) {
     renderNotes(notes, filters);
   }
 });
+
+const now = moment();
+now
+  .year(1996)
+  .month(6)
+  .date(8);
+now.format('MMM D, YYYY');
+
+console.log(now.format('MMM D, YYYY'));

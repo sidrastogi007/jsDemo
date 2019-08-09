@@ -4,7 +4,7 @@ const removeEl = document.querySelector('#note-remove');
 const noteId = location.hash.substring(1);
 let notes = getSavedModule();
 
-let note = notes.find(todo => {
+let note = notes.find((todo) => {
   return todo.id === noteId;
 });
 
@@ -17,11 +17,13 @@ bodyEl.value = note.body;
 
 titleEl.addEventListener('input', function(e) {
   note.title = e.target.value;
+  note.updateAt = moment().valueOf();
   saveNotes(notes);
 });
 
 bodyEl.addEventListener('input', function(e) {
   note.body = e.target.value;
+  note.updateAt = moment().valueOf();
   saveNotes(notes);
 });
 
@@ -34,7 +36,7 @@ removeEl.addEventListener('click', function() {
 window.addEventListener('storage', function(e) {
   if (e.key === 'notes') {
     notes = JSON.parse(e.newValue);
-    note = notes.find(todo => {
+    note = notes.find((todo) => {
       return todo.id === noteId;
     });
 

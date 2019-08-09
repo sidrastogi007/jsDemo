@@ -1,4 +1,5 @@
 let notes = getSavedModule();
+const date = moment();
 
 const filters = {
   searchText: ''
@@ -10,7 +11,9 @@ document.querySelector('#create-note').addEventListener('click', function(e) {
   const newNote = {
     id: uuidv4(),
     title: '',
-    body: ''
+    body: '',
+    createAt: date.valueOf(),
+    updateAt: date.valueOf()
   };
   notes.push(newNote);
   saveNotes(notes);
@@ -32,12 +35,3 @@ window.addEventListener('storage', function(e) {
     renderNotes(notes, filters);
   }
 });
-
-const now = moment();
-now
-  .year(1996)
-  .month(6)
-  .date(8);
-now.format('MMM D, YYYY');
-
-console.log(now.format('MMM D, YYYY'));

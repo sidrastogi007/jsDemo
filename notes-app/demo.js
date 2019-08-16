@@ -47,3 +47,46 @@
 
 //   document.querySelector('body').appendChild(userElement);
 // };
+
+db.createCollection("lang", {"name": 'string',"language": {"type": 'string' , "default": 'en' }})
+db.quotes.insertMany([{ _id: 1,
+  language: "portuguese",
+  original: "A sorte protege os audazes.",
+  translation:
+    [
+       {
+          language: "english",
+          quote: "Fortune favors the bold."
+       },
+       {
+          language: "spanish",
+          quote: "La suerte protege a los audaces."
+       }
+   ]
+}
+{
+  _id: 2,
+  language: "spanish",
+  original: "Nada hay más surrealista que la realidad.",
+  translation:
+     [
+       {
+         language: "english",
+         quote: "There is nothing more surreal than reality."
+       },
+       {
+         language: "french",
+         quote: "Il n'y a rien de plus surréaliste que la réalité."
+       }
+     ]
+}
+{
+  _id: 3,
+  original: "is this a dagger which I see before me.",
+  translation:
+  {
+     language: "spanish",
+     quote: "Es este un puñal que veo delante de mí."
+  }
+}]){
+ 

@@ -1,4 +1,5 @@
 const titleEl = document.querySelector('#note-title');
+const lastUpdateEl = document.querySelector('#lastUpdate');
 const bodyEl = document.querySelector('#note-body');
 const removeEl = document.querySelector('#note-remove');
 const noteId = location.hash.substring(1);
@@ -14,16 +15,19 @@ if (note === undefined) {
 
 titleEl.value = note.title;
 bodyEl.value = note.body;
+lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
 
 titleEl.addEventListener('input', function(e) {
   note.title = e.target.value;
   note.updateAt = moment().valueOf();
+  lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
   saveNotes(notes);
 });
 
 bodyEl.addEventListener('input', function(e) {
   note.body = e.target.value;
   note.updateAt = moment().valueOf();
+  lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
   saveNotes(notes);
 });
 
@@ -46,5 +50,6 @@ window.addEventListener('storage', function(e) {
 
     titleEl.value = note.title;
     bodyEl.value = note.body;
+    lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
   }
 });

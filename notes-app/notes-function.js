@@ -16,7 +16,7 @@ const saveNotes = function(notes) {
 
 // Remove notes value
 const removeNote = function(id) {
-  const noteIndex = notes.findIndex(note => {
+  const noteIndex = notes.findIndex((note) => {
     return (note.id = id);
   });
 
@@ -53,8 +53,47 @@ const genrateNotesDOM = function(note) {
   return noteEl;
 };
 
+// Sort Your notes by one of three ways
+
+const sortNotes = function(notes, sortBy) {
+  if (sortBy === 'byEdited') {
+    return notes.sort(function(a, b) {
+      if (a.updateAt > b.updateAt) {
+        return -1;
+      } else if (a.updateAt < b.updateAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === 'byCreated') {
+    return notes.sort(function(a, b) {
+      if (a.createAt > b.createAt) {
+        return -1;
+      } else if (a.createAt < b.createAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === 'alphabetical') {
+    return notes.sort((a, b) => {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else {
+    return notes;
+  }
+};
+
 // Reander application notes
 const renderNotes = function(notes, filters) {
+  notes = sortNotes(notes, filters.sortBy);
   const filteredNotes = notes.filter(function(note) {
     return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
   });
@@ -65,4 +104,8 @@ const renderNotes = function(notes, filters) {
     const noteEl = genrateNotesDOM(note);
     document.querySelector('#notes').appendChild(noteEl);
   });
+};
+
+const genrateLastEdited = function(timepstamp) {
+  return `Lasr Edited ${moment(timepstamp).fromNow()}`;
 };

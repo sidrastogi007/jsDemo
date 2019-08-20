@@ -1,23 +1,17 @@
 // Get todos data
-const getSavedModule = function() {
+const getSavedModule = () => {
   const todoJSON = localStorage.getItem('todos');
-  if (todoJSON !== null) {
-    return JSON.parse(todoJSON);
-  } else {
-    return [];
-  }
+  return todoJSON ? JSON.parse(todoJSON) : [];
 };
 
 // Save Todos in localStorage
-const saveTodos = function(todos) {
+const saveTodos = (todos) => {
   localStorage.setItem('todos', JSON.stringify(todos));
 };
 
 // Remove Todo data
-const removeTodo = function(id) {
-  const todoIndex = todos.findIndex(todo => {
-    return todo.id === id;
-  });
+const removeTodo = (id) => {
+  const todoIndex = todos.findIndex((todo) => todo.id === id);
 
   if (todoIndex > -1) {
     todos.splice(todoIndex, 1);
@@ -25,17 +19,15 @@ const removeTodo = function(id) {
 };
 
 // Toggle Completed value for Todos
-const toggleTodo = function(id) {
-  const todo = todos.find(todo => {
-    return todo.id === id;
-  });
-  if (todo !== undefined) {
+const toggleTodo = (id) => {
+  const todo = todos.find((todo) => todo.id === id);
+  if (!todo) {
     todo.completed = !todo.completed;
   }
 };
 
 // Genrate Todo DOM
-const genrateTodoDOM = function(todo) {
+const genrateTodoDOM = (todo) => {
   const todoEl = document.createElement('div');
   const checkBoxEl = document.createElement('input');
   const titleEl = document.createElement('span');
@@ -45,7 +37,7 @@ const genrateTodoDOM = function(todo) {
   checkBoxEl.setAttribute('type', 'checkbox');
   checkBoxEl.checked = todo.completed;
   todoEl.appendChild(checkBoxEl);
-  checkBoxEl.addEventListener('change', function() {
+  checkBoxEl.addEventListener('change', () => {
     toggleTodo(todo.id);
     saveTodos(todos);
     renderTodos(todos, filters);
@@ -58,7 +50,7 @@ const genrateTodoDOM = function(todo) {
   // Setup remove button
   buttonEl.textContent = 'x';
   todoEl.appendChild(buttonEl);
-  buttonEl.addEventListener('click', function() {
+  buttonEl.addEventListener('click', () => {
     removeTodo(todo.id);
     saveTodos(todos);
     renderTodos(todos, filters);
@@ -68,15 +60,15 @@ const genrateTodoDOM = function(todo) {
 };
 
 // Genrate DOM Summery
-const genrateSummeryDOM = function(incompleteTodos) {
+const genrateSummeryDOM = (incompleteTodos) => {
   const summary = document.createElement('h2');
   summary.textContent = `You have ${incompleteTodos.length} todos left`;
   return summary;
 };
 
 // Render Todos
-const renderTodos = function(todos, filters) {
-  let filteredTodos = todos.filter(function(todo) {
+const renderTodos = (todos, filters) => {
+  let filteredTodos = todos.filter((todo) => {
     const searchTextMatch = todo.text
       .toLowerCase()
       .includes(filters.searchText.toLowerCase());
@@ -84,16 +76,14 @@ const renderTodos = function(todos, filters) {
     return searchTextMatch && hideCompletedMatch;
   });
 
-  const incompleteTodos = filteredTodos.filter(function(todo) {
-    return !todo.completed;
-  });
+  const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
   document.querySelector('#todos').innerHTML = '';
 
   const summeryEl = genrateSummeryDOM(incompleteTodos);
   document.querySelector('#todos').appendChild(summeryEl);
 
-  filteredTodos.forEach(function(todo) {
+  filteredTodos.forEach((todo) => {
     const todosEl = genrateTodoDOM(todo);
     document.querySelector('#todos').appendChild(todosEl);
   });

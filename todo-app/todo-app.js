@@ -1,3 +1,4 @@
+'use strict'
 const todos = getSavedModule();
 
 const filters = {

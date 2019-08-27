@@ -1,3 +1,4 @@
+'use strict'
 let notes = getSavedModule();
 const date = moment();
 

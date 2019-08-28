@@ -29,3 +29,4 @@ document.querySelector('#hide').addEventListener('change', (e) => {
   filters.hideCompleted = e.target.checked;
   renderTodos(todos, filters);
 });
+

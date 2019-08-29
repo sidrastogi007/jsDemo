@@ -1,54 +1,52 @@
 'use strict'
-const titleEl = document.querySelector('#note-title');
-const lastUpdateEl = document.querySelector('#lastUpdate');
-const bodyEl = document.querySelector('#note-body');
-const removeEl = document.querySelector('#note-remove');
-const noteId = location.hash.substring(1);
-let notes = getSavedModule();
 
-let note = notes.find((todo) => todo.id === noteId);
+const titleElement = document.querySelector('#note-title')
+const bodyElement = document.querySelector('#note-body')
+const removeElement = document.querySelector('#remove-note')
+const dateElement = document.querySelector('#last-edited')
+const noteId = location.hash.substring(1)
+let notes = getSavedNotes()
+let note = notes.find((note) => note.id === noteId)
 
 if (!note) {
-  location.assign('./index.html');
+    location.assign('/index.html')
 }
 
-titleEl.value = note.title;
-bodyEl.value = note.body;
-lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
+titleElement.value = note.title
+bodyElement.value = note.body
+dateElement.textContent = generateLastEdited(note.updatedAt)
 
-titleEl.addEventListener('input', (e) => {
-  note.title = e.target.value;
-  note.updateAt = moment().valueOf();
-  lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
-  saveNotes(notes);
-});
+titleElement.addEventListener('input', (e) => {
+    note.title = e.target.value
+    note.updatedAt = moment().valueOf()
+    dateElement.textContent = generateLastEdited(note.updatedAt)
+    saveNotes(notes)
+})
 
-bodyEl.addEventListener('input', (e) => {
-  note.body = e.target.value;
-  note.updateAt = moment().valueOf();
-  lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
-  saveNotes(notes);
-});
+bodyElement.addEventListener('input', (e) => {
+    note.body = e.target.value
+    note.updatedAt = moment().valueOf()
+    dateElement.textContent = generateLastEdited(note.updatedAt)
+    saveNotes(notes)
+})
 
-removeEl.addEventListener('click', () => {
-  removeNote(noteId);
-  saveNotes(notes);
-  location.assign('./index.html');
-});
+removeElement.addEventListener('click', (e) => {
+    removeNote(note.id)
+    saveNotes(notes)
+    location.assign('/index.html')
+})
 
 window.addEventListener('storage', (e) => {
-  if (e.key === 'notes') {
-    notes = JSON.parse(e.newValue);
-    note = notes.find((todo) => {
-      return todo.id === noteId;
-    });
+    if (e.key === 'notes') {
+        notes = JSON.parse(e.newValue)
+        note = notes.find((note) => note.id === noteId)
 
-    if (!note) {
-      location.assign('./index.html');
+        if (!note) {
+            location.assign('/index.html')
+        }
+
+        titleElement.value = note.title
+        bodyElement.value = note.body
+        dateElement.textContent = generateLastEdited(note.updatedAt)
     }
-
-    titleEl.value = note.title;
-    bodyEl.value = note.body;
-    lastUpdateEl.textContent = genrateLastEdited(note.updateAt);
-  }
-});
+})

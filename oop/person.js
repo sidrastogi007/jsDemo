@@ -1,28 +1,31 @@
+// Prototypal Inheritance
+
 const Person = function (firstName, lastName, age, likes = []) {
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.age = age;
-  this.likes = likes;
+    this.firstName = firstName
+    this.lastName = lastName
+    this.age = age
+    this.likes = likes
 }
 
 Person.prototype.getBio = function () {
-  let bio = `${this.firstName} is ${this.age}`;
-  this.likes.forEach(like => {
-    bio += ` ${this.firstName} like ${like}`;
-  })
-  return bio;
+    let bio = `${this.firstName} is ${this.age}.`
+
+    this.likes.forEach((like) => {
+        bio += ` ${this.firstName} likes ${like}.`
+    })
+
+    return bio
 }
 
 Person.prototype.setName = function (fullName) {
-  const name = fullName.split(' ');
-  this.firstName = name[0];
-  this.lastName = name[1];
+    const names = fullName.split(' ')
+    this.firstName = names[0]
+    this.lastName = names[1]
 }
 
-const me = new Person('Sid', 'Rastogi', 23, ['fifa', 'pubg']);
-console.log(me.getBio());
-me.setName('Deepak Kumar');
-console.log(me.getBio());
+const me = new Person('Andrew', 'Mead', 27, ['Teaching', 'Biking'])
+me.setName('Alexis Turner')
+console.log(me.getBio())
 
-const person2 = new Person('Avi', 'Rastogi', 22);
-console.log(person2.getBio());
+const person2 = new Person('Clancey', 'Turner', 51)
+console.log(person2.getBio())

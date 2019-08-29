@@ -1,15 +1,6 @@
-const getTip = (amount) => {
-  if (typeof amount === 'number') {
-    return amount + 2;
-  }
-  else {
-    throw Error('Argument must be a number');
-  }
-}
+// Type Coercion - a string, a number, a boolean
 
-try {
-  const result = getTip('2');
-  console.log(result);
-} catch (e) {
-  console.log(e.message);
-}
+const value = false + 12
+const type = typeof value
+console.log(type)
+console.log(value)

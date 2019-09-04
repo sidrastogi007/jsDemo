@@ -12,13 +12,17 @@ window.addEventListener('keypress', function (e) {
     guessesEl.textContent = game1.statusMessage
 })
 
-getpuzzle((error, response) => {
-    if (error) {
-        console.log(`Error : ${error}`)
-    } else {
-        console.log(response)
-    }
-});
+// getpuzzle((error, response) => {
+//     if (error) {
+//         console.log(`Error : ${error}`)
+//     } else {
+//         console.log(response)
+//     }
+// });
+console.log(1)
+getpuzzle();
+console.log(3)
+
 
 // const countryCode = "IN";
 

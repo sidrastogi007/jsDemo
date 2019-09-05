@@ -27,3 +27,9 @@ getcountryDetails('IN', (err, res) => {
         console.log(res);
     }
 })
+
+// Inheritance
+// Object Oriented Programming
+// Abstraction
+// Encapsulation
+

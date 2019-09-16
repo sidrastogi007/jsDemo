@@ -22,7 +22,7 @@ class Hangman {
         } else if (this.status === 'failed') {
             return `Nice try! The word was "${this.word.join('')}".`
         } else {
-            return 'Great work! You guessed the work.'
+            return 'Great work! You guessed the word.'
         }
     }
     get puzzle() {
@@ -48,7 +48,7 @@ class Hangman {
         }
 
         if (isUnique) {
-            this.guessedLetters.push(guess)
+            this.guessedLetters = [...this.guessedLetters, guess]
         }
 
         if (isUnique && isBadGuess) {
@@ -58,3 +58,5 @@ class Hangman {
         this.calculateStatus()
     }
 }
+
+export { Hangman as default }

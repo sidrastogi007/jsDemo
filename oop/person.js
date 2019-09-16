@@ -22,9 +22,8 @@ class Person {
         this.firstName = names[0]
         this.lastName = names[1]
     }
-
     get fullName() {
-        return `${this.firstName} ${this.lastName}`;
+        return `${this.firstName} ${this.lastName}`
     }
 }
 
@@ -55,6 +54,6 @@ class Student extends Person {
     }
 }
 
-const me = new Employee('Andrew', 'Mead', 27, 88, [])
-me.fullName = 'Siddhant Rastogi';
+const me = new Employee('Andrew', 'Mead', 27, 'Teacher', [])
+me.fullName = 'Clancey Turner'
 console.log(me.getBio())

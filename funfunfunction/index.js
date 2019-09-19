@@ -31,7 +31,9 @@ function rev(arrayData, e) {
     data.shift()
   }
   console.log(arr, a.concat(data))
+  a;
 }
+
 
 
 // const reverseArray = (arr, num) => arr.slice(0, num).reverse().concat(arr.slice(num))
